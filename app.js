@@ -38,7 +38,7 @@ function addMsg(text, sender = "bot") {
 
 function addSystem(text) {
     const div = document.createElement("div");
-    div.className = `msg ${sender}`;
+    div.className = "system";
     div.textContent = text;
     chat.appendChild(div);
     chat.scrollTop = chat.scrollHeight;
