@@ -9,15 +9,33 @@
 </head>
 
 <body>
-  <script src="app.js"></script>
 
   <header>
     <h1>Lost Package Helper — eGain Chatbot Prototype</h1>
   </header>
-  
-  <main></main>
-  
-  
+
+  <main>
+    <div class="chat-wrap">
+      <div class="chat-header">
+        <div class="dot"></div>
+        <h2>Agent MayMay</h2>
+      </div>
+      <div id="chat" class="chat" aria-live="polite"></div>
+      
+      <div class="input-bar">
+        <input id="input" type="text" placeholder="Type a message… (e.g., 1Z999AA10123456784)" />
+        <button id="send">Send</button>
+       </div>
+       
+    </div>
+
+    <p class="hint">Tip: Try “I lost my package”, an invalid tracking like <span class="kbd">abc</span>, or something
+      off-topic like “tell me a joke”.</p>
+
+    <div class="chips" id="chips"></div>
+  </main>
+
+  <script src="app.js"></script>
 
 </body>
 
