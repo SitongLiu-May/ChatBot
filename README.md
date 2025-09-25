@@ -5,7 +5,7 @@ A lightweight, deterministic **customer support chatbot** for the **“lost pack
 Built with **vanilla HTML/CSS/JS**. 
 
 # Flowchart
-![Chatbox Home](assets/Egain_Chatbot Flowchart.png)
+![Chatbox Home](assets/Egain_Chatbot_Flowchart.png)
 
 ---
 
