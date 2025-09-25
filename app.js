@@ -173,3 +173,14 @@ function handleUserInput(raw, isChip = false) {
 
     input.value = "";
 }
+
+function simulateStatus() {
+    addSystem("Checking carrier status…");
+    setTimeout(() => {
+        addMsg(`Status for <b>${state.tracking}</b>: <b>${state.simulatedStatus.toUpperCase()}</b>.`);
+        if (state.simulatedStatus === "delivered") {
+            addMsg("Did you receive the package? If not, we’ll investigate.");
+            setChips(options.afterTracking);
+        } else {
+        }}
+        
