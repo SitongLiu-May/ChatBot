@@ -182,5 +182,9 @@ function simulateStatus() {
             addMsg("Did you receive the package? If not, we’ll investigate.");
             setChips(options.afterTracking);
         } else {
-        }}
-        
+            addMsg("Your package is still in transit. Would you like alerts or to contact the carrier?");
+            setChips([{ label: "Contact carrier", intent: "contact_carrier" }, { label: "Get delivery alerts", intent: "investigate" }]);
+            state.step = "tracking_status";
+        }
+    }, 800);
+}
