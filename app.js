@@ -65,7 +65,28 @@ function classifyIntent(text) {
     const t = text.toLowerCase();
     if (["lost", "where", "package", "track", "missing"].some(k => t.includes(k))) return "lost";
     if (["joke", "song", "weather"].some(k => t.includes(k))) return "off_topic";
-    if 
+    if (t.match(/^[A-Z0-9]{10,30}$/i)) return "tracking_candidate";
+    if (["not received", "didn't get", "didnt get", "no package"].some(k => t.includes(k))) return "not_received";
+    if (["wrong address", "moved", "address issue"].some(k => t.includes(k))) return "wrong_address";
+    if (["contact", "carrier", "ups", "usps", "fedex"].some(k => t.includes(k))) return "contact_carrier";
+    if (["reship"].some(k => t.includes(k))) return "reship";
+    if (["refund"].some(k => t.includes(k))) return "refund";
+    if (["investigate", "investigation", "open case"].some(k => t.includes(k))) return "investigate";
+    return "unknown";
+}
+
+function validTrackingFormat(s) {
+    return /^[A-Z0-9]{10,30}$/i.test(s);
+}
+
+// function validTrackingFormat(s) {
+//     return /^[A-Z0-9]{10,30}$/i.test(s);
+// }
+
+
+function handleUserInput(raw, isChip = false) {
+    const text = isChip ? raw : (raw || input.value.trim());
+    if (!text) return;
 
 
 
