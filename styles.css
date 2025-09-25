@@ -141,7 +141,12 @@ main {
     margin-top: 6px;
 }
 
-
+.kbd {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    background: #e5e7eb;
+    padding: 2px 6px;
+    border-radius: 6px;
+}
 
 a {
     color: #B91D8F;
