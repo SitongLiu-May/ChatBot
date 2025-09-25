@@ -19,7 +19,7 @@ Built with **vanilla HTML/CSS/JS**.
   - `tell me a joke` (off-topic → empathetic deflection)
 - **Design goal:** **predictable, testable outcomes** with just enough free-text **breadth** to feel natural.
 ![Chatbox Home](assets/abc.png)
-![Chatbox Home](refund_request/abc.png)
+![Chatbox Home](refund_request.png)
 ---
 
 
