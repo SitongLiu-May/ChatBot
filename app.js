@@ -98,7 +98,78 @@ function handleUserInput(raw, isChip = false) {
     }
 
     if (state.step === "start") {
-
-
+        if (intent === "lost") {
+            state.step = "ask_tracking";
+            addMsg("Got it. Please share your tracking number (10–30 letters/numbers, e.g., <span class='kbd'>1Z999AA10123456784</span>).");
+            setChips([]);
+        } else if (intent === "other") {
+            addMsg("I can help with shipping, returns, and refunds. What do you need?");
+            setChips([{ label: "Track a lost package", intent: "lost" }]);
+        } else if (intent === "tracking_candidate") {
+            if (validTrackingFormat(text)) {
+                state.tracking = text.toUpperCase();
+                state.step = "tracking_status";
+                simulateStatus();
+            } else {
+                addMsg("Hmm, that tracking number doesn’t look right. It should be 10–30 letters/numbers only.");
+                addMsg("Please re-enter your tracking number (no spaces or dashes).");
+            }
+        } else {
+            addMsg("To get started, tell me you want to track a lost package or share your tracking number.");
+            setChips(options.start);
+        }
+    } else if (state.step === "ask_tracking") {
+        if (validTrackingFormat(text)) {
+            state.tracking = text.toUpperCase();
+            state.step = "tracking_status";
+            simulateStatus();
+        } else {
+            addMsg("That doesn’t look like a valid tracking number. Use 10–30 letters/numbers (no spaces/dashes).");
+            addMsg("Example: <span class='kbd'>1Z999AA10123456784</span>");
+        }
+    } else if (state.step === "tracking_status") {
+        if (intent === "not_received") {
+            state.step = "address_check";
+            addMsg("Thanks for confirming. Is the shipping address correct on your order?");
+            setChips([{ label: "Yes, it’s correct", intent: "address_ok" }, { label: "No, it’s wrong", intent: "wrong_address" }]);
+        } else if (intent === "wrong_address") {
+            addressWrongFlow();
+        } else if (intent === "contact_carrier") {
+            contactCarrier();
+        } else {
+            addMsg("You can choose: Not received, Wrong address, or Contact carrier.");
+            setChips(options.afterTracking);
+        }
+    } else if (state.step === "address_check") {
+        if (intent === "address_ok") {
+            state.step = "resolution";
+            addMsg("Understood. Since the carrier shows <b>Delivered</b> but you didn’t receive it, I can:");
+            addMsg("• Open a trace with the carrier<br>• Offer a reshipment (if inventory is available)<br>• Process a refund");
+            setChips(options.resolution);
+        } else if (intent === "wrong_address") {
+            addressWrongFlow();
+        } else {
+            addMsg("Please let me know if the address is correct.");
+            setChips([{ label: "Yes, it’s correct", intent: "address_ok" }, { label: "No, it’s wrong", intent: "wrong_address" }]);
+        }
+    } else if (state.step === "resolution") {
+        if (intent === "reship") {
+            addMsg("I’ve queued a <b>free reshipment</b> to your verified address. You’ll receive a confirmation email shortly.");
+            end();
+        } else if (intent === "refund") {
+            addMsg("I’ve submitted a <b>refund request</b>. You’ll see the credit in 3–5 business days after approval.");
+            end();
+        } else if (intent === "investigate") {
+            addMsg("I’ve opened a <b>carrier investigation</b>. Expect an update within 24–48 hours.");
+            end();
+        } else {
+            addMsg("Please pick one of the options to proceed.");
+            setChips(options.resolution);
+        }
+    } else {
+        addMsg("Let’s start over.");
+        reset();
     }
+
+    input.value = "";
 }
