@@ -9,7 +9,7 @@ Built with **vanilla HTML/CSS/JS**.
 
 ---
 
-## 🔎 TL;DR
+## TL;DR
 
 - **Run:** right click and open `index.html` in any modern browser.
 - **Try:**  
@@ -18,8 +18,8 @@ Built with **vanilla HTML/CSS/JS**.
   - `1Z999AA10123456784` (valid-looking tracking)  
   - `tell me a joke` (off-topic → empathetic deflection)
 - **Design goal:** **predictable, testable outcomes** with just enough free-text **breadth** to feel natural.
-
+![Chatbox Home](assets/abc.png)
+![Chatbox Home](refund_request/abc.png)
 ---
 
-## 📂 Project structure
 
