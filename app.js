@@ -79,15 +79,26 @@ function validTrackingFormat(s) {
     return /^[A-Z0-9]{10,30}$/i.test(s);
 }
 
-// function validTrackingFormat(s) {
-//     return /^[A-Z0-9]{10,30}$/i.test(s);
-// }
-
-
 function handleUserInput(raw, isChip = false) {
     const text = isChip ? raw : (raw || input.value.trim());
     if (!text) return;
+    if (!isChip) {
+        addMsg(text, "user");
+    }
+
+    const intent = isChip ? text : classifyIntent(text);
+
+    // Off-topic input scenario
+    if (intent === "off_topic") {
+        addMsg("I’m focused on shipping help right now. Let’s get that package sorted first! :) ");
+        addMsg("Would you like to track a lost package?");
+        setChips(options.start);
+        input.value = "";
+        return;
+    }
+
+    if (state.step === "start") {
 
 
-
+    }
 }
