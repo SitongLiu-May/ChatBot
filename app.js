@@ -211,4 +211,25 @@ function end() {
 }
 
 function reset() {
+    state.step = "start";
+    state.tracking = null;
+    state.addressConfirm = null;
+    setChips([]);
+    chat.innerHTML = "";
+    greeting();
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    greeting();
+    sendBtn.addEventListener("click", () => handleUserInput());
+    input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") handleUserInput();
+    });
+    chips.addEventListener("click", (e) => {
+        if (e.target.classList.contains("chip")) {
+            const val = e.target.textContent.toLowerCase();
+            if (val.includes("start over")) reset();
+            if (val.includes("no, thanks")) addMsg("Okay! I’m here if you need anything else.");
+        }
+    });
+});
