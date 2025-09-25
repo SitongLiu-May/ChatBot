@@ -188,3 +188,10 @@ function simulateStatus() {
         }
     }, 800);
 }
+
+function addressWrongFlow() {
+    addMsg("Thanks for letting me know the address was wrong.");
+    addMsg("I can help you: (1) update your address in your account, and (2) <b>refund or reship</b> this order once it returns to our warehouse.");
+
+}
+
