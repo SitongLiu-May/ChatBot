@@ -192,6 +192,23 @@ function simulateStatus() {
 function addressWrongFlow() {
     addMsg("Thanks for letting me know the address was wrong.");
     addMsg("I can help you: (1) update your address in your account, and (2) <b>refund or reship</b> this order once it returns to our warehouse.");
-
+    setChips(options.resolution);
+    state.step = "resolution";
 }
 
+function contactCarrier() {
+    addMsg("Here are quick links for major carriers (opens in a new tab):<br>• <a href='https://www.ups.com/track' target='_blank' rel='noopener'>UPS Tracking</a><br>• <a href='https://tools.usps.com/go/TrackConfirmAction' target='_blank' rel='noopener'>USPS Tracking</a><br>• <a href='https://www.fedex.com/fedextrack/' target='_blank' rel='noopener'>FedEx Tracking</a>");
+    addMsg("Would you like me to also open a trace on your behalf?");
+    setChips([{ label: "Yes, open a trace", intent: "investigate" }, { label: "No, that’s all", intent: "end" }]);
+    state.step = "resolution";
+}
+
+function end() {
+    addSystem("Case created • Ref #" + Math.floor(Math.random() * 1e8).toString().padStart(8, "0"));
+    addMsg("Anything else I can help with?");
+    setChips([{ label: "Start over", intent: "restart" }, { label: "No, thanks", intent: "end_now" }]);
+    state.step = "end";
+}
+
+function reset() {
+}
