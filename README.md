@@ -1,7 +1,7 @@
 # Lost Package Helper — eGain SWE Take-Home
-
+![Chatbox Home](assets/lost_package_flowchart.png)
 A lightweight, deterministic **customer support chatbot** for the **“lost package”** scenario.  
-Built with **vanilla HTML/CSS/JS** (no frameworks, no build step). It demonstrates clear UX, explicit error handling, and a pragmatic dialog state machine.
+Built with **vanilla HTML/CSS/JS**. 
 
 ---
 
